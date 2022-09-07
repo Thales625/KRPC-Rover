@@ -5,7 +5,7 @@ from time import sleep
 
 class Rover():
     def __init__(self) -> None:
-        self.conn = krpc.connect('Lidar')
+        self.conn = krpc.connect('Rover')
         self.space_center = self.conn.space_center
         self.rover = self.space_center.active_vessel
         self.body = self.rover.orbit.body
@@ -17,11 +17,11 @@ class Rover():
         # Streams
         self.speed = self.conn.add_stream(getattr, self.flight, "horizontal_speed")
 
-        # Get Lidar
+        # Get Sensor
         try:
             self.sensor = self.rover.parts.with_tag('sensor')[0]
         except:
-            print('Não foi possível encontrar Lidar.')
+            print('Não foi possível encontrar Sensor.')
             exit()
         
         # Get target
